@@ -3,7 +3,7 @@ import { assets } from "../../assets/assets";
 
 function AppDownload() {
   return (
-    <div className="w-full flex justify-center my-5">
+    <div className="w-full flex justify-center my-5" id="app-download">
       <div>
         <p className="text-2xl lg:text-5xl my-4">
           For Better Experience Download <br />

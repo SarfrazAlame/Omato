@@ -3,9 +3,9 @@ import { assets } from "../../assets/assets";
 
 const Footer = () => {
   return (
-    <div className="bg-gray-600">
-      <div className="flex w-4/5 mx-auto text-white h-60 justify-between items-center">
-        <div className="w-1/3">
+    <div className="bg-gray-600 py-5 px-2 sm:px-44" id="footer">
+      <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mx-auto text-white place-items-center ">
+        <div className="">
           <img src={assets.logo} alt="" />
           <p className="my-3">
             Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolore
@@ -37,7 +37,9 @@ const Footer = () => {
         </div>
       </div>
       <hr />
-      <p className="text-center text-white">Copyright 2024 @ Tomato.com - All Right Reserved</p>
+      <p className="text-center text-white">
+        Copyright 2024 @ Tomato.com - All Right Reserved
+      </p>
     </div>
   );
 };
