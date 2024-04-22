@@ -6,7 +6,7 @@ const Navbar = () => {
   return (
     <div className="flex justify-between items-center">
       <img src={assets.logo} alt="" className="h-fit " />
-      <ul className="flex gap-7 cursor-pointer">
+      <ul className="hidden md:flex gap-7 cursor-pointer ">
         <li
           className={menu === "home" ? "pb-2 border-b border-orange-400" : ""}
           onClick={() => setMenu("home")}

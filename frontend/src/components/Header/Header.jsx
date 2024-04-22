@@ -5,7 +5,7 @@ const Header = () => {
   return (
     <div className="flex justify-center my-4">
       <div className="text-center">
-        <h2 className="my-3 text-4xl font-bold text-orange-500">Order your favourite food here</h2>
+        <h2 className="my-3 text-2xl md:text-4xl  font-bold text-orange-500">Order your favourite food here</h2>
         <p className="my-2">
           Choose from a diverse menu featuring a delectiable array of dishes
           crafted with the finest ingredients and culinary expertise. Our
