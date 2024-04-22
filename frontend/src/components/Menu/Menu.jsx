@@ -35,6 +35,7 @@ const Menu = ({ category, setCategory }) => {
           );
         })}
       </div>
+      <hr className="mt-6" />
     </div>
   );
 };
