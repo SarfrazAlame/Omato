@@ -11,9 +11,7 @@ function App() {
   const [showLogin, setShowLogin] = useState(false);
   return (
     <>
-    {
-      showLogin?<Login/>:<></>
-    }
+      {showLogin ? <Login setShowLogin={setShowLogin} /> : <></>}
       <div className="w-[80%] m-auto my-5">
         <Navbar setShowLogin={setShowLogin} />
         <Routes>
