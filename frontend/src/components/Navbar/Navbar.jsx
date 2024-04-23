@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { assets } from "../../assets/assets";
 import { Link } from "react-router-dom";
+import { StoreContext } from "../../context/StoreContext";
 
 const Navbar = ({ setShowLogin }) => {
   const [menu, setMenu] = useState("home");
+  const { getTotalCartAmount } = useContext(StoreContext);
+
   return (
     <>
       <Link>
@@ -53,7 +56,13 @@ const Navbar = ({ setShowLogin }) => {
             <Link to={"/cart"}>
               <img src={assets.basket_icon} alt="" />
             </Link>
-            <div className="absolute min-h-2 min-w-2 bg-orange-500 rounded-full top-0 -right-2"></div>
+            <div
+              className={
+                getTotalCartAmount() === 0
+                  ? ""
+                  : "absolute min-h-2 min-w-2 bg-orange-500 rounded-full top-0 -right-2"
+              }
+            ></div>
           </div>
           <button
             className="border px-6 py-2 rounded-full border-red-200 hover:bg-red-100"
