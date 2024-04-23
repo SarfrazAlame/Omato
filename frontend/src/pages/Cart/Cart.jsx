@@ -1,9 +1,34 @@
-import React from 'react'
+import React, { useContext } from "react";
+import { StoreContext } from "../../context/StoreContext";
+import FoodItem from "../../components/FoodItem/FoodItem";
 
 const Cart = () => {
+  const { cartItems, food_list, removeFromCart } = useContext(StoreContext);
   return (
-    <div>Cart</div>
-  )
-}
+    <div>
+      <div>
+        <div>
+          <p>Items</p>
+          <p>Title</p>
+          <p>Price</p>
+          <p>Quantity</p>
+          <p>Total</p>
+          <p>Remove</p>
+        </div>
+        <br />
+        <hr />
 
-export default Cart
+        {food_list.map((item, index) => {
+          if (cartItems[item._id] > 0) {
+            return <div key={index}>
+              <img src={item.image} alt="" />
+              <p>{item.name}</p>
+            </div>;
+          }
+        })}
+      </div>
+    </div>
+  );
+};
+
+export default Cart;
