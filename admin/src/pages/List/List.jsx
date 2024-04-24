@@ -4,7 +4,6 @@ import { toast } from "react-toastify";
 import { RiDeleteBin6Line } from "react-icons/ri";
 
 function List({ url }) {
-  const url = "http://localhost:8080";
   const [list, setList] = useState([]);
 
   const fetchList = async () => {

@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { assets } from "../../assets/assets";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { StoreContext } from "../../context/StoreContext";
 
 const Navbar = ({ setShowLogin }) => {
@@ -9,13 +9,13 @@ const Navbar = ({ setShowLogin }) => {
 
   return (
     <>
-      <Link>
+      <Link to={'/'}>
         <img src={assets.logo} alt="" className="h-fit sm:hidden my-4" />
       </Link>
       <div className="flex justify-between items-center">
-        <Link>
+        <NavLink to={"/"}>
           <img src={assets.logo} alt="" className="h-fit hidden sm:flex" />
-        </Link>
+        </NavLink>
         <ul className="hidden md:flex gap-7 cursor-pointer ">
           <Link
             to={"/"}
