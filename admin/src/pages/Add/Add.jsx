@@ -3,8 +3,7 @@ import { assets } from "../../assets/assets";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-function Add() {
-  const url = "http://localhost:8080";
+function Add({url}) {
   const [image, setImage] = useState(false);
   const [data, setData] = useState({
     name: "",
@@ -45,9 +44,9 @@ function Add() {
   };
 
   return (
-    <div className="m-10 w-2/3 mx-auto">
+    <div className="sm:m-10 w-full md:w-2/3 mx-auto">
       <form className="flex flex-col" onSubmit={onSubmitHandler}>
-        <div className="my-3 w-1/4">
+        <div className="my-3 w-full md:w-1/4">
           <p className="text-gray-600">Upload Image</p>
           <label htmlFor="image">
             <img
@@ -69,7 +68,7 @@ function Add() {
         <div className="w-full my-2">
           <p className="text-gray-600">Product Name</p>
           <input
-            className="w-1/3 border outline-none border-gray-400 py-2 rounded my-2"
+            className="w-4/5 sm:w-1/2 md:w-1/3 border outline-none border-gray-400 py-2 rounded my-2"
             type="text"
             name="name"
             placeholder="Type Here"
@@ -86,17 +85,17 @@ function Add() {
             name="description"
             rows="6"
             placeholder="Write Content here"
-            className="w-1/3 border outline-none border-gray-400 rounded my-2"
+            className="w-4/5 sm:w-1/2 md:w-1/3 border outline-none border-gray-400 rounded my-2"
           ></textarea>
         </div>
 
-        <div className="flex my-2 gap-3 ">
+        <div className="sm:flex w-full my-2 gap-3 ">
           <div className="">
             <p className="text-gray-600">Product Category</p>
             <select
               onChange={onChangeHandler}
               name="category"
-              className="border outline-none w-full border-gray-400 py-2 my-2 rounded"
+              className="border outline-none w-2/3 sm:w-full border-gray-400 py-2 my-2 rounded"
             >
               <option value="Salad">Salad</option>
               <option value="Rolls">Rolls</option>
