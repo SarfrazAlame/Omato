@@ -5,8 +5,27 @@ import jwt from 'jsonwebtoken'
 
 // login user
 const loginUser = async (req, res) => {
-    const { name, email, password } = req.body
+    const { email, password } = req.body
+    try {
+        const user = await userModel.findOne({ email })
+        if (!user) {
+            return res.json({ success: false, message: "email is not registered" })
+        }
 
+        const isMatch = await bcrypt.compare(password, user.password)
+
+        if (!isMatch) {
+            return res.json({ success: false, message: "Invalid Credentials" })
+        }
+
+        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET)
+
+        res.json({ success: true, token })
+
+    } catch (error) {
+        console.log(error)
+        res.json({ success: false, message: "Error" })
+    }
 }
 
 // register user
@@ -35,13 +54,13 @@ const registerUser = async (req, res) => {
 
         const user = await newUser.save()
 
-        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET)
+        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '4h' })
 
-        res.json({ success: true, token })
+        return res.json({ success: true, token })
 
     } catch (error) {
         console.log(error)
-        res.json({ success: false, message: "error" })
+        return res.json({ success: false, message: error })
     }
 }
 

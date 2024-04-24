@@ -3,6 +3,7 @@ import cors from 'cors'
 import { connectDb } from './config/db.js'
 import foodRouter from './routes/foodRoute.js'
 import userRouter from './routes/userRouter.js'
+import 'dotenv/config'
 
 
 // app config

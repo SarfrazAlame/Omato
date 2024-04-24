@@ -3,6 +3,10 @@ import { assets } from "../../assets/assets";
 
 const Login = ({ setShowLogin }) => {
   const [currentState, setCurrentState] = useState("Sign Up");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   return (
     <div className="absolute -mt-10 w-full h-2/3 bg-opacity-50 bg-gray-800 grid ">
       <form className="place-self-center flex flex-col bg-white gap-6 py-6 px-8 rounded-lg font-normal">
@@ -19,11 +23,29 @@ const Login = ({ setShowLogin }) => {
             <></>
           ) : (
             <>
-              <input className="border  border-gray-600 h-12 rounded-md px-3 " type="text" placeholder="Your Name" required />
+              <input
+                onChange={(e) => setName(e.target.value)}
+                className="border  border-gray-600 h-12 rounded-md px-3 "
+                type="text"
+                placeholder="Your Name"
+                required
+              />
             </>
           )}
-          <input className="border  border-gray-600 h-12 rounded-md px-3 " type="email" placeholder="Your Email" required />
-          <input className="border  border-gray-600 h-12 rounded-md px-3 " type="password" placeholder="Your Password" required />
+          <input
+            onChange={(e) => setEmail(e.target.value)}
+            className="border  border-gray-600 h-12 rounded-md px-3 "
+            type="email"
+            placeholder="Your Email"
+            required
+          />
+          <input
+            onChange={(e) => setPassword(e.target.value)}
+            className="border  border-gray-600 h-12 rounded-md px-3 "
+            type="password"
+            placeholder="Your Password"
+            required
+          />
         </div>
 
         <button className="w-full border h-12 rounded-md bg-orange-500 text-white">
@@ -32,7 +54,9 @@ const Login = ({ setShowLogin }) => {
 
         <div className="flex justify-between">
           <input type="checkbox" required />
-          <p className="w-4/5 ">By continuing, i agree to the terms of use & privacy policy</p>
+          <p className="w-4/5 ">
+            By continuing, i agree to the terms of use & privacy policy
+          </p>
         </div>
         {currentState === "Login" ? (
           <>
