@@ -1,12 +1,49 @@
 import React, { useState } from "react";
 import { assets } from "../../assets/assets";
+import axios from "axios";
 
 function Add() {
+  const url = "http://localhost:8080";
   const [image, setImage] = useState(false);
+  const [data, setData] = useState({
+    name: "",
+    description: "",
+    price: "",
+    category: "Salad",
+  });
+
+  const onChangeHandler = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setData((data) => ({ ...data, [name]: value }));
+  };
+
+  const onSubmitHandler = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("name", data.name);
+    formData.append("description", data.description);
+    formData.append("price", data.price);
+    formData.append("category", data.category);
+    formData.append("image", image);
+
+    const response = await axios.post(`${url}/api/food/add`, formData);
+
+    if (response.data.success) {
+      setData({
+        name: "",
+        description: "",
+        price: "",
+        category: "Salad",
+      });
+      setImage(false);
+    } else {
+    }
+  };
 
   return (
     <div className="m-10 w-2/3 mx-auto">
-      <form className="flex flex-col">
+      <form className="flex flex-col" onSubmit={onSubmitHandler}>
         <div className="my-3 w-1/4">
           <p className="text-gray-600">Upload Image</p>
           <label htmlFor="image">
@@ -33,12 +70,16 @@ function Add() {
             type="text"
             name="name"
             placeholder="Type Here"
+            onChange={onChangeHandler}
+            value={data.name}
           />
         </div>
 
         <div>
           <p className="text-gray-600">Product description</p>
           <textarea
+            onChange={onChangeHandler}
+            value={data.description}
             name="description"
             rows="6"
             placeholder="Write Content here"
@@ -50,6 +91,7 @@ function Add() {
           <div className="">
             <p className="text-gray-600">Product Category</p>
             <select
+              onChange={onChangeHandler}
               name="category"
               className="border outline-none w-full border-gray-400 py-2 my-2 rounded"
             >
@@ -65,6 +107,8 @@ function Add() {
           <div>
             <p className="text-gray-600">Product price</p>
             <input
+              onChange={onChangeHandler}
+              value={data.price}
               type="number"
               name="price"
               placeholder="$20"
