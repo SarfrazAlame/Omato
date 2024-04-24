@@ -5,11 +5,11 @@ import { StoreContext } from "../../context/StoreContext";
 
 const Navbar = ({ setShowLogin }) => {
   const [menu, setMenu] = useState("home");
-  const { getTotalCartAmount } = useContext(StoreContext);
+  const { getTotalCartAmount, token } = useContext(StoreContext);
 
   return (
     <>
-      <Link to={'/'}>
+      <Link to={"/"}>
         <img src={assets.logo} alt="" className="h-fit sm:hidden my-4" />
       </Link>
       <div className="flex justify-between items-center">
@@ -64,12 +64,16 @@ const Navbar = ({ setShowLogin }) => {
               }
             ></div>
           </div>
-          <button
-            className="border px-6 py-2 rounded-full border-red-200 hover:bg-red-100"
-            onClick={() => setShowLogin(true)}
-          >
-            sign in
-          </button>
+          {token ? (
+            <></>
+          ) : (
+            <button
+              className="border px-6 py-2 rounded-full border-red-200 hover:bg-red-100"
+              onClick={() => setShowLogin(true)}
+            >
+              sign in
+            </button>
+          )}
         </div>
 
         <div className="sm:hidden flex w-full items-center justify-between gap-7">

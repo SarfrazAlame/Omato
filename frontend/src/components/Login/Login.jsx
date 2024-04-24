@@ -1,15 +1,51 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { assets } from "../../assets/assets";
+import { StoreContext } from "../../context/StoreContext";
+import axios from "axios";
 
 const Login = ({ setShowLogin }) => {
+  const { url, setToken } = useContext(StoreContext);
+
   const [currentState, setCurrentState] = useState("Sign Up");
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [user, setUser] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+
+  const handleOnchange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+
+    setUser((data) => ({ ...data, [name]: value }));
+  };
+
+  const handlerSubmit = async (e) => {
+    e.preventDefault();
+    let newUrl = url;
+    if (currentState === "Login") {
+      newUrl += "/api/user/login";
+    } else {
+      newUrl += "/api/user/register";
+    }
+
+    const response = await axios.post(newUrl, user);
+
+    if (response.data.success) {
+      setToken(response.data.data);
+      localStorage.setItem("token", response.data.token);
+      setShowLogin(false);
+    } else {
+      alert(response.data.message);
+    }
+  };
 
   return (
     <div className="absolute -mt-10 w-full h-2/3 bg-opacity-50 bg-gray-800 grid ">
-      <form className="place-self-center flex flex-col bg-white gap-6 py-6 px-8 rounded-lg font-normal">
+      <form
+        className="place-self-center flex flex-col bg-white gap-6 py-6 px-8 rounded-lg font-normal"
+        onSubmit={handlerSubmit}
+      >
         <div className="flex justify-between items-center text-black">
           <h2 className="text-2xl font-bold text-gray-700">{currentState}</h2>
           <img
@@ -24,7 +60,9 @@ const Login = ({ setShowLogin }) => {
           ) : (
             <>
               <input
-                onChange={(e) => setName(e.target.value)}
+                onChange={handleOnchange}
+                value={user.name}
+                name="name"
                 className="border  border-gray-600 h-12 rounded-md px-3 "
                 type="text"
                 placeholder="Your Name"
@@ -33,14 +71,18 @@ const Login = ({ setShowLogin }) => {
             </>
           )}
           <input
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={handleOnchange}
+            value={user.email}
+            name="email"
             className="border  border-gray-600 h-12 rounded-md px-3 "
             type="email"
             placeholder="Your Email"
             required
           />
           <input
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={handleOnchange}
+            value={user.password}
+            name="password"
             className="border  border-gray-600 h-12 rounded-md px-3 "
             type="password"
             placeholder="Your Password"
@@ -48,7 +90,10 @@ const Login = ({ setShowLogin }) => {
           />
         </div>
 
-        <button className="w-full border h-12 rounded-md bg-orange-500 text-white">
+        <button
+          type="submit"
+          className="w-full border h-12 rounded-md bg-orange-500 text-white"
+        >
           {currentState === "Sign Up" ? "Create Account" : "Login"}
         </button>
 
