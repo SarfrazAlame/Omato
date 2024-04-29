@@ -4,7 +4,7 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
-  const { cartItems, food_list, removeFromCart, getTotalCartAmount } =
+  const { cartItems, food_list, removeFromCart, getTotalCartAmount, url } =
     useContext(StoreContext);
   const navigate = useNavigate();
 
@@ -27,7 +27,7 @@ const Cart = () => {
             return (
               <div key={index}>
                 <div className="grid grid-cols-6 justify-between h-16 my-2 gap-6">
-                  <img src={item.image} alt="" className="h-14" />
+                  <img src={url+"/images/"+item.image} alt="" className="h-14" />
                   <p>{item.name}</p>
                   <p>${item.price}</p>
                   <p>{cartItems[item._id]}</p>
@@ -56,12 +56,14 @@ const Cart = () => {
             <hr />
             <div className="flex justify-between mt-4 mb-2">
               <p className="font-semibold text-gray-600">Delivery Fee</p>
-              <p>${getTotalCartAmount()===0?0:2}</p>
+              <p>${getTotalCartAmount() === 0 ? 0 : 2}</p>
             </div>
             <hr />
             <div className="flex justify-between mt-4 mb-2">
               <b className="font-semibold text-gray-800">Total</b>
-              <b>${getTotalCartAmount()===0?0:getTotalCartAmount()+2}</b>
+              <b>
+                ${getTotalCartAmount() === 0 ? 0 : getTotalCartAmount() + 2}
+              </b>
             </div>
           </div>
           <button
